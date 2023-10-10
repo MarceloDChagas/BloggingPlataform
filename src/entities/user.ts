@@ -1,15 +1,17 @@
+import { IUserDTO } from "./IUserDTO";
+
 export class User{
     name: string;
     username: string;
     age: number;
     email: string;
     password: string;
-    constructor(name: string, username: string, age: number, email: string, password: string){
-        this.name = name;
-        this.username = username;
-        this.age = age;
-        this.email = email;
-        this.password = password;
+    constructor(data: IUserDTO){
+        this.name = data.name;
+        this.username = data.username;
+        this.age = data.age;
+        this.email = data.email;
+        this.password = data.password;
     }
     
 }

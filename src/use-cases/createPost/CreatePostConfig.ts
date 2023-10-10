@@ -2,5 +2,5 @@ import { MongoDBPostRepository } from "../../infrastructure/repositories/databas
 import { CreatePostUseCase } from "./CreatePostUseCase";
 import { CreatePostController } from "./CreatePostController";
 
-const createPostUseCase = new CreatePostUseCase(new MongoDBPostRepository);
-const createPostController = new CreatePostController(createPostUseCase);
+export const createPostUseCase = new CreatePostUseCase(new MongoDBPostRepository);
+export const createPostController = new CreatePostController(createPostUseCase);

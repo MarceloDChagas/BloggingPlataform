@@ -13,22 +13,20 @@ export class MongoDBUserRepository implements IUserRepository{
             throw new Error("Erro ao criar o usuário");
         }
     }
-    async update(id: string, user: User): Promise<User> {
+    async update(id: string, user: User): Promise<void> {
         try {
             const updatedUser = await UserSchema.findByIdAndUpdate(id, user);
             console.log("Usuário atualizado com sucesso", updatedUser);
-            return updatedUser as User;
         } catch(err) {
             console.error("Houve um erro ao atualizar o usuário", err);
             throw new Error("Erro ao atualizar o usuário");
         }
     }
 
-    async delete(id: string): Promise<User> {
+    async delete(id: string): Promise<void> {
         try{
             const deletedUser = await UserSchema.findByIdAndDelete(id);
             console.log("Usuário deletado com sucesso", deletedUser);
-            return deletedUser as User;
         } catch(err){
             console.error("Houve um erro ao deletar o usuário", err);
             throw new Error("Erro ao deletar o usuário");

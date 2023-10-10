@@ -1,6 +1,6 @@
-import moongose from 'mongoose';
+import mongoose from 'mongoose';
 
-const Schema = moongose.Schema;
+const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
     name: {
@@ -33,4 +33,4 @@ const UserSchema = new Schema({
     },
 });
 
-export default UserSchema;
+export default mongoose.model("UserSchema", UserSchema);
