@@ -7,8 +7,7 @@ const username = process.env.MONGODB_USERNAME;
 const password = process.env.MONGODB_PASSWORD;
 const cluster = process.env.MONGODB_CLUSTER;
 
-//const url = `mongodb+srv://${username}:${password}@${cluster}.sviste8.mongodb.net/`;
-const url = "mongodb+srv://MarceloChagas:<password>@blogging.sviste8.mongodb.net/?retryWrites=true&w=majority"
+const url = `mongodb+srv://${username}:${password}@${cluster}.sviste8.mongodb.net/`;
 
 export async function connectionToMongo(): Promise<string> {
   try {

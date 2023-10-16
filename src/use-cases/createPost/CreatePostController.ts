@@ -1,14 +1,14 @@
 import { Request, Response } from "express";
-import { CreateUserUseCase } from "../createUser/CreateUserUseCase";
+import { CreatePostUseCase } from "./CreatePostUseCase";
 
-export class CratePostController{
-    constructor(private createUserUseCase: CreateUserUseCase){}
+export class CreatePostController{
+        constructor(private createPostUseCase: CreatePostUseCase){}
     async handle(req: Request, res: Response): Promise<Response>{
-        const {name, username, age, email, password} = req.body;
+        const {title, content} = req.body;
         try{
-            await this.createUserUseCase.executeCreateUser({name, username, age, email, password});
+            await this.createPostUseCase.executeCreatePost({title, content});
             return res.status(201).send();
-        }catch(err){
+        }catch(err:any){
             return res.status(400).json({
                 message: err.message || "Unexpected error."
             })
