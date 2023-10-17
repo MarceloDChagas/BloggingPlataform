@@ -3,8 +3,8 @@ import { IUserRepository } from "../../infrastructure/repositories/IUserReposito
 
 export class UpdateUserUseCase {
     constructor(private userRepository: IUserRepository) {}
-    async executeUpdateUser(id: string, data: IUserDTO): Promise<any> {
-        const user = await this.userRepository.update(id, data);
+    async executeUpdateUser(email: string, data: IUserDTO): Promise<any> {
+        const user = await this.userRepository.update(email, data);
         return user;
     }
 }

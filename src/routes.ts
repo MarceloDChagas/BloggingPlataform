@@ -2,11 +2,11 @@
  * Express router instance for handling HTTP requests related to users, posts and comments.
  */
 import express, { Request, Response, NextFunction } from "express";
+import { User } from "./entities/user";
 import { connectionToMongo } from "./infrastructure/repositories/database/MongoDB/mongo.connection";
 import { createUserController } from "./use-cases/createUser/CreateUserConfig";
 import { createPostController } from "./use-cases/createPost/CreatePostConfig";
 import { getUserController } from "./use-cases/getUser/GetUserConfig";
-import { User } from "./entities/user";
 import { updateUserController } from "./use-cases/updateUser/UpdateUserConfig";
 import { deleteUserController } from "./use-cases/deleteUser/DeleteUserConfig";
 import { commentOnPostController } from "./use-cases/commentOnPost/CommentOnPostConfig";
@@ -15,7 +15,7 @@ import { userCreatePostController } from "./use-cases/userCreatePost/UserCreateP
 
 const router = express.Router();
 
-router.use((req, res, next) => {
+router.use((_req, _res, next) => {
   connectionToMongo();
   next();
 });

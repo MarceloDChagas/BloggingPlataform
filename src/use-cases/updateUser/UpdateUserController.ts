@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 
 export class UpdateUserController {
   constructor(private updateUserUseCase: UpdateUserUseCase) {}
-  async handle(req: Request, res: Response) {
+  async handleUpdateUser(req: Request, res: Response) {
     try {
       const { email } = req.params;
       const { username, name, age, password } = req.body;
@@ -17,7 +17,7 @@ export class UpdateUserController {
       res
         .status(201)
         .send({ message: "Usuário atualizado com sucesso!", user });
-    } catch (error) {
+    } catch (error: any) {
       res.status(400).send({ message: error.message });
     }
   }

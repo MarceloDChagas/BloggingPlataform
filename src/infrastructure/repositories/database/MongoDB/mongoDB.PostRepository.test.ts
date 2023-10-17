@@ -1,14 +1,12 @@
+import { describe, expect, beforeEach, it } from '@jest/globals';
 import {MongoDBPostRepository} from "./mongoDB.PostRepository";
 import {Post} from "../../../../entities/post"
 import { Comment } from "../../../../entities/comment";
 
 describe("MongoDBPostRepository methods tests", () => {
-
     let repository : MongoDBPostRepository;
     const post = new Post({title: "title", content: "text"});
     post.id = "123456789";
-
-
     beforeEach(() => {
         repository = new MongoDBPostRepository();
     });
@@ -18,7 +16,7 @@ describe("MongoDBPostRepository methods tests", () => {
                 title: "title",
                 content: "text",
             };
-            const postId: any | undefined = await repository.createPost(post);
+            const postId: Post | undefined = await repository.createPost(post);
             expect(postId).toBeDefined();
         });
         it("should return a error for invalid properties", async () => {

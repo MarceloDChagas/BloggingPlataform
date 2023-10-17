@@ -2,7 +2,6 @@ import { Post } from "../../../../entities/post";
 import { IPostRepository } from "../../IPostRepository";
 import PostSchema from "./Post/PostSchema";
 import { Comment } from "../../../../entities/comment";
-import mongoose from "mongoose";
 import CommentSchema from "./Comment/CommentSchema";
 
 export class MongoDBPostRepository implements IPostRepository {
@@ -52,6 +51,7 @@ export class MongoDBPostRepository implements IPostRepository {
       throw new Error("Erro ao buscar os posts");
     }
   }
+
   async getById(id: string): Promise<Post> {
     try {
       const post = await PostSchema.findById(id);
@@ -69,6 +69,7 @@ export class MongoDBPostRepository implements IPostRepository {
       throw new Error("Erro ao buscar o post");
     }
   }
+  
   async addComment(postId: string, comment: Comment): Promise<void> {
     try {
       const post = await PostSchema.findById(postId);

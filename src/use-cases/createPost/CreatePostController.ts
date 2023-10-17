@@ -2,8 +2,9 @@ import { Request, Response } from "express";
 import { CreatePostUseCase } from "./CreatePostUseCase";
 
 export class CreatePostController{
-        constructor(private createPostUseCase: CreatePostUseCase){}
-    async handle(req: Request, res: Response): Promise<Response>{
+    constructor(private createPostUseCase: CreatePostUseCase){}
+    
+    async handleCreatePost(req: Request, res: Response): Promise<Response>{
         const {title, content} = req.body;
         try{
             await this.createPostUseCase.executeCreatePost({title, content});

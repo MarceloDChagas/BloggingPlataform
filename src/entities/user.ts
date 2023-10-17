@@ -16,5 +16,4 @@ export class User{
         this.password = data.password;
         
     }
-    
 }

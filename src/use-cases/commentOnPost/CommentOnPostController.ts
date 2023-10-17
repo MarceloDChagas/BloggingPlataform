@@ -1,4 +1,3 @@
-import { ICommentRepository } from "../../infrastructure/repositories/ICommentRepository";
 import { IPostRepository } from "../../infrastructure/repositories/IPostRepository";
 import { Request, Response } from "express";
 import { CommentOnPostUseCase } from "./CommentOnPostUseCase";

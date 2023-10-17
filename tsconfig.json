@@ -1,0 +1,20 @@
+{
+    "compilerOptions": {
+      "esModuleInterop": true,
+      "module": "commonjs",
+      "target": "es6",
+      "lib": ["es6", "dom"],
+      "sourceMap": true,
+      "outDir": "./dist",
+      "strict": true,
+      "moduleResolution": "node",
+      "types": ["node", "express"],
+      "baseUrl": ".",
+      "paths": {
+        "*": ["node_modules/*", "src/types/*"]
+      }
+    },
+    "include": ["src/**/*", "src/types/*", "jest.config.js"],
+    "exclude": ["node_modules"]
+  }
+  

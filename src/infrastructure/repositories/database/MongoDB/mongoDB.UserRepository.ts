@@ -14,9 +14,9 @@ export class MongoDBUserRepository implements IUserRepository {
       throw new Error("Erro ao criar o usuário");
     }
   }
-  async update(id: string, user: User): Promise<void> {
+  async update(email: string, user: User): Promise<void> {
     try {
-      const updatedUser = await UserSchema.findByIdAndUpdate(id, user);
+      const updatedUser = await UserSchema.findByIdAndUpdate(email, user);
       console.log("Usuário atualizado com sucesso", updatedUser);
     } catch (err) {
       console.error("Houve um erro ao atualizar o usuário", err);
@@ -37,24 +37,27 @@ export class MongoDBUserRepository implements IUserRepository {
     try {
       const users = await UserSchema.find();
       console.log("Usuários encontrados com sucesso", users);
-      return users as any as User[];
+      return users.map((user) => user.toObject()) as User[];
     } catch (err) {
       console.error("Houve um erro ao buscar os usuários", err);
       throw new Error("Erro ao buscar os usuários");
     }
   }
+
+  //Metodo para buscar o usuário por email, é usado por outros métodos e não um endpoint
   async findByEmail(email: string): Promise<User | null> {
     try {
       const user = await UserSchema.findOne({ email });
       if (!user) {
         return null;
       }
-      return user as any as User;
+      return user.toObject() as User;
     } catch (err) {
       console.error("Houve um erro ao buscar o usuário por email", err);
       throw new Error("Erro ao buscar o usuário por email");
     }
   }
+  
   async addPost(userEmail: string, post: Post): Promise<void> {
     try {
       const user = await UserSchema.findOne({ email: userEmail })
