@@ -23,8 +23,12 @@ router.use((req, res, next) => {
 /**
  * Endpoint for testing the server.
  */
-router.get("/", (_req: Request, res: Response) => {
-  res.send("Hello World!");
+router.get("/", (_req: Request, res: Response, next: NextFunction) => {
+  try {
+    res.send("Hello World!");
+  } catch (error) {
+    next(error);
+  }
 });
 
 /**
@@ -37,7 +41,7 @@ router.post(
   "/users",
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      await createUserController.handle(req, res);
+      await createUserController.handleCreateUser(req, res);
       res.status(201).send({ message: "Usuário criado com sucesso!" });
     } catch (error) {
       next(error);
@@ -55,7 +59,7 @@ router.post(
   "/posts",
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      await createPostController.handle(req, res);
+      await createPostController.handleCreatePost(req, res);
       res.status(201).send({ message: "Post criado com sucesso!" });
     } catch (error) {
       console.log(error);
@@ -89,10 +93,10 @@ router.get(
  * @returns A success message.
  */
 router.put(
-  "/users/:id",
+  "/users/:email",
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      await updateUserController.handle(req, res);
+      await updateUserController.handleUpdateUser(req, res);
       res.status(200).send({ message: "Usuário atualizado com sucesso!" });
     } catch (error) {
       next(error);
@@ -110,26 +114,8 @@ router.delete(
   "/users/:id",
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      await deleteUserController.handle(req, res);
+      await deleteUserController.handleDeleteUser(req, res);
       res.status(200).send({ message: "Usuário excluído com sucesso!" });
-    } catch (error) {
-      next(error);
-    }
-  }
-);
-
-/**
- * Endpoint for creating a new post.
- * @param req - The request object.
- * @param res - The response object.
- * @returns A success message.
- */
-router.post(
-  "/posts",
-  async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      await createPostController.handle(req, res);
-      res.send({ message: "Post criado com sucesso!" });
     } catch (error) {
       next(error);
     }
@@ -142,11 +128,13 @@ router.post(
  * @param res - The response object.
  * @returns A success message.
  */
-router.post("/comments/:postId", async (req: Request, res: Response) => {
+router.post("/comments/:postId", async (req: Request, res: Response, next: NextFunction) => {
     try {
-        await commentOnPostController.handle(req, res);
+        await commentOnPostController.handleCommentOnPost(req, res);
         res.status(201).send({ message: "Comentário criado com sucesso!" });
-    } catch (err: any) {}
+    } catch (err: any) {
+      next(err);
+    }
 });
 
 /**
@@ -155,9 +143,13 @@ router.post("/comments/:postId", async (req: Request, res: Response) => {
  * @param res - The response object.
  * @returns An array of Post objects.
  */
-router.get("/posts", async (req: Request, res: Response) => {
-    const posts = await getPostController.handleGetAll(req, res);
-    res.status(200).json(posts);
+router.get("/posts", async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const posts = await getPostController.handleGetAll(req, res);
+      res.status(200).json(posts);
+    } catch (error) {
+      next(error);
+    }
 });
 
 /**
@@ -166,9 +158,13 @@ router.get("/posts", async (req: Request, res: Response) => {
  * @param res - The response object.
  * @returns A Post object.
  */
-router.get("/posts/:id", async (req: Request, res: Response) => {
-    const post = await getPostController.handleGetById(req, res);
-    res.status(200).json(post);
+router.get("/posts/:id", async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const post = await getPostController.handleGetById(req, res);
+      res.status(200).json(post);
+    } catch (error) {
+      next(error);
+    }
 });
 
 /**
@@ -177,9 +173,13 @@ router.get("/posts/:id", async (req: Request, res: Response) => {
  * @param res - The response object.
  * @returns A Post object.
  */
-router.post("/userPost", async (req: Request, res: Response) => {
-    const post = await userCreatePostController.handle(req, res);
-    res.status(200).json(post);
+router.post("/userPost/:email", async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const post = await userCreatePostController.handleCreatePost(req, res);
+      res.status(200).json(post);
+    } catch (error) {
+      next(error);
+    }
 });
 
 export default router;

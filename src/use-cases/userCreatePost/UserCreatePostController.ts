@@ -7,7 +7,7 @@ export class UserCreatePostController {
     private userCreatePostUseCase: UserCreatePostUseCase,
     private userRepository: IUserRepository
   ) {}
-  async handle(request: Request, response: Response) {
+  async handleCreatePost(request: Request, response: Response) {
     const { email } = request.params;
     const { title, content } = request.body;
     const user = this.userRepository.findByEmail(email);

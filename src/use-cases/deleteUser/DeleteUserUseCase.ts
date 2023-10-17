@@ -3,11 +3,11 @@ import { IUserRepository } from "../../infrastructure/repositories/IUserReposito
 
 export class DeleteUserUseCase {
    constructor(private userRepository: IUserRepository) { }
-    async executeDeleteUser(data: string): Promise<void> {
-        // const userAlreadyExists = await this.userRepository.findByEmail(data.email);
-        // if(userAlreadyExists){
-        //     throw new Error("User already exists");
-        // }
-        await this.userRepository.delete(data);
+    async executeDeleteUser(data: IUserDTO): Promise<void> {
+        const userAlreadyExists = await this.userRepository.findByEmail(data.email);
+        if(!userAlreadyExists){
+             throw new Error("User not even exists");
+         }
+        await this.userRepository.delete(data.email);
     }
 }

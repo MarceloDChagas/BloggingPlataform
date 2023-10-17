@@ -8,7 +8,7 @@ export class CommentOnPostController {
     private commentOnPostUseCase: CommentOnPostUseCase,
     private postRepository: IPostRepository
   ) {}
-  async handle(request: Request, response: Response) {
+  async handleCommentOnPost(request: Request, response: Response) {
     const { postId } = request.params;
     const { content } = request.body;
     const post = await this.postRepository.getById(postId);

@@ -5,19 +5,19 @@ export class UpdateUserController {
   constructor(private updateUserUseCase: UpdateUserUseCase) {}
   async handle(req: Request, res: Response) {
     try {
-      const { id } = req.params;
-      const { username, name, age, email, password } = req.body;
-      const user = await this.updateUserUseCase.executeUpdateUser(id, {
+      const { email } = req.params;
+      const { username, name, age, password } = req.body;
+      const user = await this.updateUserUseCase.executeUpdateUser(email, {
         username,
         name,
         age,
-        email,
+        email: req.body.email,
         password,
       });
       res
         .status(201)
         .send({ message: "Usuário atualizado com sucesso!", user });
-    } catch (error: any) {
+    } catch (error) {
       res.status(400).send({ message: error.message });
     }
   }

@@ -24,9 +24,9 @@ export class MongoDBUserRepository implements IUserRepository {
     }
   }
 
-  async delete(id: string): Promise<void> {
+  async delete(email: string): Promise<void> {
     try {
-      const deletedUser = await UserSchema.findByIdAndDelete(id);
+      const deletedUser = await UserSchema.findByIdAndDelete(email);
       console.log("Usuário deletado com sucesso", deletedUser);
     } catch (err) {
       console.error("Houve um erro ao deletar o usuário", err);
@@ -55,17 +55,16 @@ export class MongoDBUserRepository implements IUserRepository {
       throw new Error("Erro ao buscar o usuário por email");
     }
   }
-  //Corrigir pra email depois
-  async addPost(userId: string, post: Post): Promise<void> {
+  async addPost(userEmail: string, post: Post): Promise<void> {
     try {
-      const user = await UserSchema.findById(userId);
+      const user = await UserSchema.findOne({ email: userEmail })
       if (!user) {
         throw new Error("Usuário não encontrado");
       }
       const newPost = new PostSchema({
         title: post.title,
         content: post.content,
-        user: userId,
+        user: userEmail,
       });
       await newPost.save();
       user.posts.push(newPost._id);
@@ -76,4 +75,20 @@ export class MongoDBUserRepository implements IUserRepository {
       throw new Error("Erro ao adicionar o post");
     }
   }
+
+  async getAllPostsForUser(userEmail: string): Promise<Post[]> {
+    try {
+      const email = await UserSchema.find({ email: userEmail });
+      if (!email) {
+        throw new Error("Email não encontrado");
+      }
+      const posts: Post[] = await PostSchema.find({ user: userEmail });
+      console.log("Posts encontrados com sucesso", posts);
+      return posts;
+    }catch(err){
+      console.error("Houve um erro ao buscar os posts", err);
+      throw new Error("Erro ao buscar os posts");
+    }
+  }
+
 }
