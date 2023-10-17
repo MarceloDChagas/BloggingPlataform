@@ -1,91 +1,82 @@
-# BloggingPlataform
+# Tutorial de Utilização da API
 
-       <h1>Tutorial de Utilização da API</h1>
+## Criar Usuário
 
-    <h2>Criar Usuário</h2>
+### POST /rota/users
 
-    <h3>POST /rota/users</h3>
-    <p>Cria um novo usuário.</p>
-    <p>Fornecer essas informações no formato JSON:</p>
-    <code>
-        {
-            "name": "string",
-            "username": "string",
-            "age": "number",
-            "email": "string",
-            "password": "string"
-        }
-    </code>
+Cria um novo usuário.
 
-    <h2>Criar Post</h2>
+Fornecer essas informações no formato JSON:
 
-    <h3>POST /rota/posts</h3>
-    <p>Cria um novo post.</p>
-    <p>Fornecer essas informações no formato JSON:</p>
-    <code>
-        {
-            "title": "string",
-            "content": "string"
-        }
-    </code>
+```json
+{
+    "name": "string",
+    "username": "string",
+    "age": "number",
+    "email": "string",
+    "password": "string"
+}
 
-    <h2>Listar Usuários</h2>
+Criar Post
+POST /rota/posts
+Cria um novo post.
 
-    <h3>GET /rota/users</h3>
-    <p>Lista todos os usuários.</p>
+Fornecer essas informações no formato JSON:
 
-    <h2>Atualizar Usuário</h2>
+{
+    "title": "string",
+    "content": "string"
+}
 
-    <h3>PUT /rota/users/:id</h3>
-    <p>Atualiza os dados de um usuário.</p>
-    <p>Fornecer o email nos parâmetros e essas informações no formato JSON:</p>
-    <code>
-        {
-            "username": "string",
-            "name": "string",
-            "age": "number",
-            "password": "string"
-        }
-    </code>
+Listar Usuários
+GET /rota/users
+Lista todos os usuários.
 
-    <h2>Deletar Usuário</h2>
+Atualizar Usuário
+PUT /rota/users/:id
+Atualiza os dados de um usuário.
 
-    <h3>DELETE /rota/users/:id</h3>
-    <p>Deleta um usuário.</p>
-    <p>Fornecer o ID do usuário nos parâmetros.</p>
+Fornecer o email nos parâmetros e essas informações no formato JSON:
 
-    <h2>Adicionar Comentário a um Post</h2>
+{
+    "username": "string",
+    "name": "string",
+    "age": "number",
+    "password": "string"
+}
 
-    <h3>POST /rota/comments/:postID</h3>
-    <p>Adiciona um comentário a um post.</p>
-    <p>Fornecer o ID do post nos parâmetros e essa informação no formato JSON:</p>
-    <code>
-        {
-            "content": "string"
-        }
-    </code>
+Deletar Usuário
+DELETE /rota/users/:id
+Deleta um usuário.
 
-    <h2>Buscar Todos os Posts</h2>
+Fornecer o ID do usuário nos parâmetros.
 
-    <h3>GET /rota/posts</h3>
-    <p>Busca todos os posts.</p>
+Adicionar Comentário a um Post
+POST /rota/comments/:postID
+Adiciona um comentário a um post.
 
-    <h2>Buscar Post Específico</h2>
+Fornecer o ID do post nos parâmetros e essa informação no formato JSON:
 
-    <h3>GET /rota/posts/:id</h3>
-    <p>Busca o post com o ID especificado.</p>
-    <p>Fornecer o ID do post nos parâmetros.</p>
+{
+    "content": "string"
+}
 
-    <h2>Criar Post Associado a um Usuário</h2>
+Buscar Todos os Posts
+GET /rota/posts
+Busca todos os posts.
 
-    <h3>POST /rota/userPost</h3>
-    <p>Cria um post, associando-o a um usuário.</p>
-    <p>Fornecer o email do usuário nos parâmetros e essas informações no formato JSON:</p>
-    <code>
-        {
-            "title": "string",
-            "content": "string"
-        }
-    </code>
+Buscar Post Específico
+GET /rota/posts/:id
+Busca o post com o ID especificado.
 
+Fornecer o ID do post nos parâmetros.
 
+Criar Post Associado a um Usuário
+POST /rota/userPost
+Cria um post, associando-o a um usuário.
+
+Fornecer o email do usuário nos parâmetros e essas informações no formato JSON:
+{
+    "title": "string",
+    "content": "string"
+}
