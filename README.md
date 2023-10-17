@@ -1,14 +1,5 @@
 # BloggingPlataform
 
-<!DOCTYPE html>
-<html>
-
-<head>
-    <title>Tutorial de Utilização da API</title>
-</head>
-
-<body>
-
     <h1>Tutorial de Utilização da API</h1>
 
     <h2>Criar Usuário</h2>
@@ -97,6 +88,3 @@
         }
     </pre>
 
-</body>
-
-</html>
