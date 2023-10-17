@@ -1,11 +1,8 @@
 # Tutorial de Utilização da API
 
-## Criar Usuário
-
-### POST /rota/users
-
+Criar Usuário
+POST /rota/users
 Cria um novo usuário.
-
 Fornecer essas informações no formato JSON:
 ```json
 {
