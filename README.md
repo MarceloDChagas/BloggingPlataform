@@ -1,13 +1,13 @@
 # BloggingPlataform
 
-    <h1>Tutorial de Utilização da API</h1>
+       <h1>Tutorial de Utilização da API</h1>
 
     <h2>Criar Usuário</h2>
 
     <h3>POST /rota/users</h3>
     <p>Cria um novo usuário.</p>
     <p>Fornecer essas informações no formato JSON:</p>
-    <pre>
+    <code>
         {
             "name": "string",
             "username": "string",
@@ -15,19 +15,19 @@
             "email": "string",
             "password": "string"
         }
-    </pre>
+    </code>
 
     <h2>Criar Post</h2>
 
     <h3>POST /rota/posts</h3>
     <p>Cria um novo post.</p>
     <p>Fornecer essas informações no formato JSON:</p>
-    <pre>
+    <code>
         {
             "title": "string",
             "content": "string"
         }
-    </pre>
+    </code>
 
     <h2>Listar Usuários</h2>
 
@@ -39,14 +39,14 @@
     <h3>PUT /rota/users/:id</h3>
     <p>Atualiza os dados de um usuário.</p>
     <p>Fornecer o email nos parâmetros e essas informações no formato JSON:</p>
-    <pre>
+    <code>
         {
             "username": "string",
             "name": "string",
             "age": "number",
             "password": "string"
         }
-    </pre>
+    </code>
 
     <h2>Deletar Usuário</h2>
 
@@ -59,11 +59,11 @@
     <h3>POST /rota/comments/:postID</h3>
     <p>Adiciona um comentário a um post.</p>
     <p>Fornecer o ID do post nos parâmetros e essa informação no formato JSON:</p>
-    <pre>
+    <code>
         {
             "content": "string"
         }
-    </pre>
+    </code>
 
     <h2>Buscar Todos os Posts</h2>
 
@@ -81,10 +81,11 @@
     <h3>POST /rota/userPost</h3>
     <p>Cria um post, associando-o a um usuário.</p>
     <p>Fornecer o email do usuário nos parâmetros e essas informações no formato JSON:</p>
-    <pre>
+    <code>
         {
             "title": "string",
             "content": "string"
         }
-    </pre>
+    </code>
+
 
