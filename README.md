@@ -1,6 +1,6 @@
-# BloggingPlataform
+- BloggingPlataform
 
-       <h1>Tutorial de Utilização da API</h1>
+  <h1>Tutorial de Utilização da API</h1>
 
     <h2>Criar Usuário</h2>
 
