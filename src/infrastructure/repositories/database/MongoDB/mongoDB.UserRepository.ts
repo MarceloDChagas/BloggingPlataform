@@ -60,24 +60,24 @@ export class MongoDBUserRepository implements IUserRepository {
   
   async addPost(userEmail: string, post: Post): Promise<void> {
     try {
-      const user = await UserSchema.findOne({ email: userEmail })
-      if (!user) {
-        throw new Error("Usuário não encontrado");
-      }
-      const newPost = new PostSchema({
-        title: post.title,
-        content: post.content,
-        user: userEmail,
-      });
-      await newPost.save();
-      user.posts.push(newPost._id);
-      await user.save();
-      console.log("Post adicionado com sucesso", user);
+        const user = await UserSchema.findOne({ email: userEmail });
+        if (!user) {
+            throw new Error("Usuário não foi encontrado");
+        }
+        const newPost = new PostSchema({
+            title: post.title,
+            content: post.content,
+            user: user._id, 
+        });
+        await newPost.save();
+        user.posts.push(newPost._id);
+        await user.save();
+        console.log("Post adicionado com sucesso", user);
     } catch (err) {
-      console.error("Houve um erro ao adicionar o post", err);
-      throw new Error("Erro ao adicionar o post");
+        console.error("Houve um erro ao adicionar o post", err);
+        throw new Error("Erro ao adicionar o post");
     }
-  }
+}
 
   async getAllPostsForUser(userEmail: string): Promise<Post[]> {
     try {

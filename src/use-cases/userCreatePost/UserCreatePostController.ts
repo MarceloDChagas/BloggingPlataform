@@ -7,9 +7,8 @@ export class UserCreatePostController {
     private userCreatePostUseCase: UserCreatePostUseCase,
     private userRepository: IUserRepository
   ) {}
-  async handleCreatePost(request: Request, response: Response) {
-    const { email } = request.params;
-    const { title, content } = request.body;
+  async handleUserCreatePost(request: Request, response: Response) {
+    const { title, content, email } = request.body;
     const user = this.userRepository.findByEmail(email);
     if (!user) {
       return response.status(404).json({ message: "User not found" });
