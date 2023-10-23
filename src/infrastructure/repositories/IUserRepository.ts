@@ -8,5 +8,5 @@ export interface IUserRepository {
     getAll(): Promise<User[]>;
     findByEmail(email: string): Promise<User | null>;
     addPost(postId: string, post: Post): Promise<void>;
-    
+    getAllPostsForUser(id: string): Promise<Post[]>;
     }

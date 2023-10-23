@@ -7,16 +7,16 @@ export class CommentOnPostController {
     private commentOnPostUseCase: CommentOnPostUseCase,
     private postRepository: IPostRepository
   ) {}
-  async handleCommentOnPost(request: Request, response: Response) {
-    const { postId } = request.params;
-    const { content } = request.body;
+  async handleCommentOnPost(req: Request, res: Response) {
+    const { content, postId } = req.body;
     const post = await this.postRepository.getById(postId);
     if (!post) {
-      return response.status(404).json({ message: "Post not found" });
+      return res.status(404).json({ message: "Post not found" });
     }
     const comment = await this.commentOnPostUseCase.commentRepository.create({
       content,
     });
     await this.postRepository.addComment(postId, comment);
+    return res.status(201).json({ message: "Comment created" });
   }
 }

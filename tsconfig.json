@@ -14,7 +14,10 @@
         "*": ["node_modules/*", "src/types/*"]
       }
     },
-    "include": ["src/**/*", "src/types/*", "jest.config.js"],
-    "exclude": ["node_modules"]
+    "include": ["src/**/*", "src/types/*", "jest.config.js", "babel.config.js"],
+    "exclude": ["node_modules"],
+    "babelOptions": {
+      "presets": ["@babel/preset-env"]
+    }
   }
   

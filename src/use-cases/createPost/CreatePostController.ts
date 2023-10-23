@@ -1,18 +1,14 @@
 import { Request, Response } from "express";
 import { CreatePostUseCase } from "./CreatePostUseCase";
+import { PostValidator } from "../../validators/PostValidator";
 
 export class CreatePostController{
     constructor(private createPostUseCase: CreatePostUseCase){}
     
     async handleCreatePost(req: Request, res: Response): Promise<Response>{
         const {title, content} = req.body;
-        try{
-            await this.createPostUseCase.executeCreatePost({title, content});
-            return res.status(201).send();
-        }catch(err:any){
-            return res.status(400).json({
-                message: err.message || "Unexpected error."
-            })
-        }
+        PostValidator.isNotValid({title, content});
+        await this.createPostUseCase.executeCreatePost({title, content});
+        return res.status(201).send({message: "Post criado com sucesso!"});
     }
 }

@@ -1,20 +1,23 @@
-import { connectionToMongo } from "./mongo.connection";
+import { beforeEach, describe, it, expect, jest, afterAll } from "@jest/globals";
+import { connectionToMongo, url, disconnectFromMongo } from "./mongo.connection";
 
-describe("connectionToMongo", () => {
-  it("should connect to MongoDB Atlas", async () => {
-    const result = await connectionToMongo();
-    expect(result).toEqual("Conectado ao MongoDB Atlas");
-  });
+describe("MongoDB connection", () => {
+	beforeEach(async() => {
+		jest.resetModules();
+		jest.resetAllMocks();
+	});
+	afterAll(async () => {
+		disconnectFromMongo();
+	});
 
-  it("should throw an error if connection fails", async () => {
-    // Change the URL to an invalid one to simulate a failed connection
-    const invalidUrl = "mongodb+srv://invalid-url";
-    const originalUrl = process.env.MONGODB_URI;
-    process.env.MONGODB_URI = invalidUrl;
 
-    await expect(connectionToMongo()).rejects.toThrow("Erro na conexão com o MongoDB Atlas");
+	it("should connect to MongoDB", async () => {
+		const connection = await connectionToMongo(url);
+		expect(connection).toBeUndefined();
+	});
 
-    // Restore the original URL
-    process.env.MONGODB_URI = originalUrl;
-  });
+	it("should throw an error if it can't connect to MongoDB", async () => {
+		const invalidUrl = "mongodb+srv://invalidUsername:invalidPassword@$invalidCluster.sviste8.mongodb.net/";
+		expect(connectionToMongo(invalidUrl)).rejects.toThrowError("Erro na conexão com o MongoDB Atlas");
+	});
 });
