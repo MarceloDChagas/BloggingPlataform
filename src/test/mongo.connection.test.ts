@@ -1,5 +1,5 @@
 import { beforeEach, describe, it, expect, jest, afterAll } from "@jest/globals";
-import { connectionToMongo, url, disconnectFromMongo } from "./mongo.connection";
+import { connectionToMongo, url, disconnectFromMongo } from "../infrastructure/repositories/database/MongoDB/mongo.connection";
 
 describe("MongoDB connection", () => {
 	beforeEach(async() => {

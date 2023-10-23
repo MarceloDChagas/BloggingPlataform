@@ -1,4 +1,4 @@
-import { GetPostUseCase } from "./GetPostUseCase";
+import { GetPostUseCase } from "./GetPostUseCase"
 import { Request, Response } from "express";
 
 export class GetPostController {

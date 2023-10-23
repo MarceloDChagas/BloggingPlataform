@@ -10,6 +10,7 @@ import { getPostController } from "./use-cases/getPost/GetPostConfig";
 import { userCreatePostController } from "./use-cases/userCreatePost/UserCreatePostConfig";
 import { getCommentController } from "./use-cases/getComment/GetCommentConfig";
 import { getPostByUserController } from "./use-cases/getPostsByUser/getPostByUserConfig";
+import { deletePostController } from "./use-cases/deletePost/DeletePostConfig";
 
 const router = express.Router();
 
@@ -39,7 +40,7 @@ router.post("/posts", async (req: Request, res: Response) => {
 	try {
 		await createPostController.handleCreatePost(req, res);
 	} catch (error) {
-		return res.sendStatus(500);
+		return res.sendStatus(400);
 	}
 });
 
@@ -55,7 +56,7 @@ router.put("/users/:email", async (req: Request, res: Response) => {
 	try {
 		await updateUserController.handleUpdateUser(req, res);
 	} catch (error) {
-		return res.sendStatus(500);
+		return res.sendStatus(400);
 	}
 });
 
@@ -71,14 +72,14 @@ router.post("/postsComment", async (req: Request, res: Response) => {
 	try {
 		await commentOnPostController.handleCommentOnPost(req, res);
 	} catch (error) {
-		return res.sendStatus(500);
+		return res.sendStatus(400);
 	} });
 
 router.get("/posts/:id", async (req: Request, res: Response) => {
 	try {
 		await getPostController.handleGetPostById(req, res);
 	} catch (error) {
-		return res.sendStatus(500);
+		return res.sendStatus(400);
 	}
 });
 
@@ -86,7 +87,7 @@ router.post("/usersPosts", async (req: Request, res: Response) => {
 	try {
 		await userCreatePostController.handleUserCreatePost(req, res);
 	} catch (error) {
-		return res.sendStatus(500);
+		return res.sendStatus(400);
 	}
 });
 
@@ -94,7 +95,7 @@ router.get("/comments", async (req: Request, res: Response) => {
 	try {
 		await getCommentController.handleGetAllComments(req, res);
 	} catch (error) {
-		return res.sendStatus(500);
+		return res.sendStatus(400);
 	}
 });
 
@@ -104,6 +105,14 @@ router.get("/usersPosts", async (req: Request, res: Response) => {
 	}
 	catch (error) {
 		return res.sendStatus(500);
+	}
+});
+
+router.delete("/posts/:id", async (req: Request, res: Response) => {
+	try {
+		await deletePostController.handleDeletePostById(req, res);
+	} catch (error) {
+		return res.sendStatus(400);
 	}
 });
 

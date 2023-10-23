@@ -1,16 +1,9 @@
 import request from "supertest";
-import app from "../../app/app";
+import app from "../app/app";
 import { describe,it,expect, afterEach } from "@jest/globals";
+import {user} from "./userModel";
 
 describe("CreateUserController", () => {
-    
-	const user = {
-		name: "John Doe",
-		email: "canso@gmail.com",
-		password: "123456dS@",
-		username: "johndoess",
-		age: 20
-	};
 
 	afterEach(async () => {
 		await request(app).del(`/users/${user.email}`);

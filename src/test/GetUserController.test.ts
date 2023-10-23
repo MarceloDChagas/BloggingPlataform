@@ -1,15 +1,9 @@
 import request from "supertest";
-import app from "../../app/app";
+import app from "../app/app";
 import { describe,it,expect, beforeAll, afterAll } from "@jest/globals";
+import {user} from "./userModel";
 
 describe("GetUserController", () => {
-	const user = {
-		name: "John Doe",
-		email: "canso@gmail.com",
-		password: "123456dS@",
-		username: "johndoess",
-		age: 20
-	};
 
 	beforeAll(async () => {
 		await request(app).post("/users").send(user); 

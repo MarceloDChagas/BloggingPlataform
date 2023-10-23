@@ -1,17 +1,11 @@
 import request from "supertest";
-import app from "../../app/app";
+import app from "../app/app";
 import { describe,it,expect } from "@jest/globals";
+import {user} from "./userModel";
+
 
 describe("DeleteUserController", () => {
     
-	const user = {
-		name: "John Doe",
-		email: "canso@gmail.com",
-		password: "123456dS@",
-		username: "johndoess",
-		age: 20
-	};
-
 	it("should return 201 when user is deleted", async () => {
 		await request(app).post("/users").send(user);
 		const response = await request(app).delete(`/users/${user.email}`);
