@@ -6,10 +6,10 @@ import { CommentOnPostUseCase } from "./CommentOnPostUseCase";
 
 const post = new Post({ content: "Teste", title: "Teste" });
 export const commentOnPostUseCase = new CommentOnPostUseCase(
-  new MongoDBCommentRepository(),
-  post
+	new MongoDBCommentRepository(),
+	post
 );
 export const commentOnPostController = new CommentOnPostController(
-  commentOnPostUseCase,
-  new MongoDBPostRepository()
+	commentOnPostUseCase,
+	new MongoDBPostRepository()
 );

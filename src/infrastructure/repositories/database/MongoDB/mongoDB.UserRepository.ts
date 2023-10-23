@@ -9,7 +9,6 @@ export class MongoDBUserRepository implements IUserRepository {
 		try {
 			await UserSchema.create(user); 
 		} catch (err) {
-			console.log("Canso mariano " + err);
 			throw new Error("Erro ao criar o usuário");
 		}
 	}
@@ -25,7 +24,7 @@ export class MongoDBUserRepository implements IUserRepository {
 
 	async delete(email: string): Promise<void> {
 		try {
-			await UserSchema.findByIdAndDelete(email);
+			await UserSchema.findOneAndDelete({ email });
 		} catch (err) {
 			throw new Error("Erro ao deletar o usuário");
 		}
@@ -36,6 +35,18 @@ export class MongoDBUserRepository implements IUserRepository {
 			return users.map((user) => user.toObject()) as User[];
 		} catch (err) {
 			throw new Error("Erro ao buscar os usuários");
+		}
+	}
+
+	async findById(id: string): Promise<User | null> {
+		try {
+			const user = await UserSchema.findById(id);
+			if (!user) {
+				return null;
+			}
+			return user.toObject() as User;
+		} catch (err) {
+			throw new Error("Erro ao buscar o usuário por id");
 		}
 	}
 

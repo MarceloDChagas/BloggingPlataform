@@ -1,6 +1,3 @@
-/**
- * Express router instance for handling HTTP requests related to users, posts and comments.
- */
 import express, { Request, Response } from "express";
 import { connectionToMongo, url } from "./infrastructure/repositories/database/MongoDB/mongo.connection";
 import { createUserController } from "./use-cases/createUser/CreateUserConfig";
@@ -21,34 +18,23 @@ router.use((_req: Request, _res: Response, next) => {
 	next();
 });
 
-/**
- * Endpoint for testing the server.
- */
-router.get("/", (_req: Request, res: Response) => {
-	res.send("Hello World!");
+router.get("/users/:email", async (req: Request, res: Response) => {
+	try {
+		await getUserController.handleGetUserByEmail(req, res);
+	} catch (error) {
+		return res.sendStatus(404);
+	}
 });
 
-/**
- * Endpoint for creating a new user.
- * @param req - The request object.
- * @param res - The response object.
- * @returns A success message.
- */
 router.post("/users", async (req: Request, res: Response) => {
 	try {
 		await createUserController.handleCreateUser(req, res);
 	} catch (error) {
 		console.log(error);
-		return res.sendStatus(500);
+		return res.sendStatus(400);
 	}
 });
 
-/**
- * Endpoint for creating a new post.
- * @param req - The request object.
- * @param res - The response object.
- * @returns A success message.
- */
 router.post("/posts", async (req: Request, res: Response) => {
 	try {
 		await createPostController.handleCreatePost(req, res);
@@ -57,56 +43,30 @@ router.post("/posts", async (req: Request, res: Response) => {
 	}
 });
 
-/**
- * Endpoint for retrieving all users.
- * @param req - The request object.
- * @param res - The response object.
- * @returns An array of User objects.
- */
 router.get("/users", async (req: Request, res: Response) => {
 	try {
 		await getUserController.handleGetAllUser(req, res);
 	} catch (error) {
-		return res.sendStatus(500);
+		return res.sendStatus(404);
 	}
 });
 
-/**
- * Endpoint for updating a user.
- * @param req - The request object.
- * @param res - The response object.
- * @returns A success message.
- */
 router.put("/users/:email", async (req: Request, res: Response) => {
 	try {
 		await updateUserController.handleUpdateUser(req, res);
 	} catch (error) {
 		return res.sendStatus(500);
 	}
-	res.send({ message: "Usuário atualizado com sucesso!" });
 });
 
-/**
- * Endpoint for deleting a user.
- * @param req - The request object.
- * @param res - The response object.
- * @returns A success message.
- */
-router.delete("/users/:id", async (req: Request, res: Response) => {
+router.delete("/users/:email", async (req: Request, res: Response) => {
 	try {
-		await deleteUserController.handleDeleteUser(req, res);
+		await deleteUserController.handleDeleteUserByEmail(req, res);
 	} catch (error) {
-		return res.sendStatus(500);
+		return res.sendStatus(404);
 	}
-	res.send({ message: "Usuário deletado com sucesso!" });
 });
 
-/**
- * Endpoint for commenting on a post.
- * @param req - The request object.
- * @param res - The response object.
- * @returns A success message.
- */
 router.post("/postsComment", async (req: Request, res: Response) => {
 	try {
 		await commentOnPostController.handleCommentOnPost(req, res);
@@ -114,12 +74,6 @@ router.post("/postsComment", async (req: Request, res: Response) => {
 		return res.sendStatus(500);
 	} });
 
-/**
- * Endpoint for retrieving a post.
- * @param req - The request object.
- * @param res - The response object.
- * @returns A Post object.
- */
 router.get("/posts/:id", async (req: Request, res: Response) => {
 	try {
 		await getPostController.handleGetPostById(req, res);
@@ -128,35 +82,14 @@ router.get("/posts/:id", async (req: Request, res: Response) => {
 	}
 });
 
-router.get("/posts",async (req: Request, res:Response) => {
-	try {
-		await getPostController.handleGetAllPosts(req, res);
-	} catch (error) {
-		return res.sendStatus(500);
-	}  
-});
-
-/**
- * Endpoint for creating a new post.
- * @param req - The request object.
- * @param res - The response object.
- * @returns A success message.
- */
 router.post("/usersPosts", async (req: Request, res: Response) => {
 	try {
 		await userCreatePostController.handleUserCreatePost(req, res);
 	} catch (error) {
 		return res.sendStatus(500);
 	}
-	res.status(201).send({ message: "Post criado com sucesso!" });
 });
 
-/**
- * Endpoint for retrieving all comments.
- * @param req - The request object.
- * @param res - The response object.
- * @returns An array of Comment objects.
- */
 router.get("/comments", async (req: Request, res: Response) => {
 	try {
 		await getCommentController.handleGetAllComments(req, res);
