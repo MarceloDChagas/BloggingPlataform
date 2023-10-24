@@ -11,6 +11,7 @@ import { userCreatePostController } from "./use-cases/userCreatePost/UserCreateP
 import { getCommentController } from "./use-cases/getComment/GetCommentConfig";
 import { getPostByUserController } from "./use-cases/getPostsByUser/getPostByUserConfig";
 import { deletePostController } from "./use-cases/deletePost/DeletePostConfig";
+import { deleteCommentController } from "./use-cases/deleteComment/DeleteCommentConfig";
 
 const router = express.Router();
 
@@ -111,6 +112,14 @@ router.get("/usersPosts", async (req: Request, res: Response) => {
 router.delete("/posts/:id", async (req: Request, res: Response) => {
 	try {
 		await deletePostController.handleDeletePostById(req, res);
+	} catch (error) {
+		return res.sendStatus(400);
+	}
+});
+
+router.delete("/comments/:id", async (req: Request, res: Response) => {
+	try {
+		await deleteCommentController.handleDeleteCommentById(req, res);
 	} catch (error) {
 		return res.sendStatus(400);
 	}
