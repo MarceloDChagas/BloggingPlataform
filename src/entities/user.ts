@@ -8,6 +8,8 @@ export class User{
 	email: string;
 	password: string;
 	posts?: Post[];
+	likedPosts?: Post[];
+
 	constructor(data: IUserDTO){
 		this.name = data.name;
 		this.username = data.username;

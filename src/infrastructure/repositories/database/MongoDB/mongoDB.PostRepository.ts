@@ -3,6 +3,8 @@ import { IPostRepository } from "../../IPostRepository";
 import PostSchema from "./Post/PostSchema";
 import { Comment } from "../../../../entities/comment";
 import CommentSchema from "./Comment/CommentSchema";
+import { PostRepository, UserRepository } from "../../../../use-cases/GlobalConfig";
+
 
 export class MongoDBPostRepository implements IPostRepository {
 	async createPost(post: Post): Promise<Post> {
@@ -46,11 +48,11 @@ export class MongoDBPostRepository implements IPostRepository {
 		}
 	}
   
-	async getById(id: string): Promise<Post> {
+	async getById(id: string): Promise<Post | null> {
 		try {
 			const post = await PostSchema.findById(id);
 			if (!post) {
-				throw new Error("Post não encontrado");
+				return null;
 			}
 			return {
 				...post.toObject(),
@@ -77,6 +79,18 @@ export class MongoDBPostRepository implements IPostRepository {
 			await post.save();
 		} catch (err) {
 			throw new Error("Erro ao adicionar o comentário");
+		}
+	}
+
+	async likePost(postAndUserEmail: [Post, string]): Promise<void> {
+		try {
+			if (postAndUserEmail[0].id === undefined) {
+				throw new Error("Email do usuário não pode ser undefined");
+			}
+			postAndUserEmail[0].likes?.addLike(postAndUserEmail[1]);
+			await PostRepository.updatePost(postAndUserEmail[0].id, postAndUserEmail[0]);
+		} catch (err) {
+			throw new Error("Erro ao curtir o post");
 		}
 	}
 }

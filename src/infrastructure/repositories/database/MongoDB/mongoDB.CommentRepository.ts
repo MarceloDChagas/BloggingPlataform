@@ -1,6 +1,7 @@
 import { ICommentRepository } from "../../ICommentRepository";
 import CommentSchema from "./Comment/CommentSchema";
 import { Comment } from "../../../../entities/comment";
+import { CommentRepository, UserRepository } from "../../../../use-cases/GlobalConfig";
 
 /**
  * MongoDB implementation of the Comment Repository interface.
@@ -54,6 +55,40 @@ export class MongoDBCommentRepository implements ICommentRepository {
 			})) as Comment[];
 		} catch (err) {
 			throw new Error("Erro ao buscar os comentários");
+		}
+	}
+
+	async getById(id: string): Promise<Comment> {
+		try {
+			const comment = await CommentSchema.findById(id);
+			if (!comment) {
+				throw new Error("Comentário não encontrado");
+			}
+			return {
+				...comment.toObject(),
+				id: comment._id.toString(),
+			} as Comment;
+		}catch(err){
+			throw new Error("Erro ao buscar o comentário");
+		}
+	}
+
+	async update(id: string, comment: Comment): Promise<void> {
+		try {
+			await CommentSchema.findByIdAndUpdate(id, comment);
+		} catch(err){
+			throw new Error("Erro ao atualizar o comentário");
+		}
+	}
+
+	async likeComment(commentId: string, userId: string): Promise<void> {
+		try{
+			const comment = await CommentRepository.getById(commentId);
+			await UserRepository.findById(userId);
+			comment.likes?.addLike(userId);
+			await CommentRepository.update(commentId, comment);
+		}catch(err){
+			throw new Error("Erro ao curtir o comentário");
 		}
 	}
 }

@@ -3,7 +3,6 @@ import app from "../app/app";
 import { describe,it,expect } from "@jest/globals";
 import {user} from "./userModel";
 
-
 describe("DeleteUserController", () => {
     
 	it("should return 201 when user is deleted", async () => {

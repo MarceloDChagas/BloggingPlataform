@@ -1,3 +1,4 @@
+import { CommentRepository, PostRepository, UserRepository } from "../../../../use-cases/GlobalConfig";
 import { Post } from "../../../../entities/post";
 import { User } from "../../../../entities/user";
 import { IUserRepository } from "../../IUserRepository";
@@ -16,7 +17,7 @@ export class MongoDBUserRepository implements IUserRepository {
 
 	async update(email: string, user: User): Promise<void> {
 		try {
-			await UserSchema.findByIdAndUpdate(email, user);
+			await UserSchema.findOneAndUpdate({ email }, user);
 		} catch (err) {
 			throw new Error("Erro ao atualizar o usuário");
 		}
