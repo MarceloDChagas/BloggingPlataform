@@ -1,6 +1,6 @@
-import { MongoDBPostRepository } from "../../infrastructure/repositories/database/MongoDB/mongoDB.PostRepository";
 import { DeletePostUseCase } from "./DeletePostUseCase";
 import { DeletePostController } from "./DeletePostController";
+import { PostRepository } from "../GlobalConfig";
 
-export const deletePostUseCase = new DeletePostUseCase(new MongoDBPostRepository);
+export const deletePostUseCase = new DeletePostUseCase(PostRepository);
 export const deletePostController = new DeletePostController(deletePostUseCase);

@@ -1,8 +1,7 @@
-import { MongoDBPostRepository } from "../../infrastructure/repositories/database/MongoDB/mongoDB.PostRepository";
-import { MongoDBUserRepository } from "../../infrastructure/repositories/database/MongoDB/mongoDB.UserRepository";
 import { UserCreatePostController } from "./UserCreatePostController";
 import { UserCreatePostUseCase } from "./UserCreatePostUseCase";
 import { User } from "../../entities/user";
+import { PostRepository, UserRepository } from "../GlobalConfig";
 
 const user = new User({
   name: "John Doe",
@@ -13,10 +12,10 @@ const user = new User({
 });
 
 export const userCreatePostUseCase = new UserCreatePostUseCase(
-  new MongoDBPostRepository(),
+  PostRepository,
   user
 );
 export const userCreatePostController = new UserCreatePostController(
   userCreatePostUseCase,
-  new MongoDBUserRepository()
+  UserRepository
 );

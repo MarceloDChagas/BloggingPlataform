@@ -1,6 +1,6 @@
-import { MongoDBUserRepository } from "../../infrastructure/repositories/database/MongoDB/mongoDB.UserRepository";
 import { DeleteUserController } from "./DeleteUserController";
 import { DeleteUserUseCase } from "./DeleteUserUseCase";
+import { UserRepository } from "../GlobalConfig";
 
-export const deleteUserUseCase = new DeleteUserUseCase(new MongoDBUserRepository);
+export const deleteUserUseCase = new DeleteUserUseCase(UserRepository);
 export const deleteUserController = new DeleteUserController(deleteUserUseCase);

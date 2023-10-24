@@ -1,6 +1,6 @@
-import { MongoDBUserRepository } from "../../infrastructure/repositories/database/MongoDB/mongoDB.UserRepository";
 import { CreateUserUseCase } from "./CreateUserUseCase";
 import { CreateUserController } from "./CreateUserController";
+import { UserRepository } from "../GlobalConfig";
 
-export const createUserUseCase = new CreateUserUseCase(new MongoDBUserRepository);
+export const createUserUseCase = new CreateUserUseCase(UserRepository);
 export const createUserController = new CreateUserController(createUserUseCase); 
