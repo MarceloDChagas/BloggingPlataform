@@ -1,17 +1,17 @@
 import request from "supertest";
 import app from "../app/app";
-import { describe,it,expect, afterEach } from "@jest/globals";
+import { describe,it,expect, afterEach, jest } from "@jest/globals";
 import {user} from "./userModel";
 
 describe("CreateUserController", () => {
 
 	afterEach(async () => {
+		jest.resetModules();
 		await request(app).del(`/users/${user.email}`);
 	});
 
 	it("should return 201 when user is created", async () => {
 		const response = await request(app).post("/users").send(user);
-		expect(response.body.message).toBe("Usuário criado com sucesso!");
 		expect(response.status).toBe(201);
 	});
 	

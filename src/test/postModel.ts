@@ -1,4 +1,4 @@
 export const post = {
-    title: "example title",
-    content: "example content",
-}
+	title: "example title",
+	content: "example content",
+};

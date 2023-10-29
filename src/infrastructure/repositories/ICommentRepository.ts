@@ -7,5 +7,4 @@ export interface ICommentRepository {
   getById(id: string): Promise<Comment | null>;
   update(id: string, comment: Comment): Promise<void> | null;
   likeComment(commentId: string, userId: string): Promise<void>;
-
 }

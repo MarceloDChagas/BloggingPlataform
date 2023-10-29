@@ -1,4 +1,3 @@
-import { CommentRepository, PostRepository, UserRepository } from "../../../../use-cases/GlobalConfig";
 import { Post } from "../../../../entities/post";
 import { User } from "../../../../entities/user";
 import { IUserRepository } from "../../IUserRepository";

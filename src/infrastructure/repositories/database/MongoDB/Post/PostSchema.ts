@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import { Likes } from "../../../../../entities/likes";
 
 const Schema = mongoose.Schema;
 
@@ -10,6 +9,7 @@ const PostSchema = new Schema({
 	},
 	content: {
 		type: String,
+		required: true,
 	},
 	comments: [
 		{
@@ -22,7 +22,7 @@ const PostSchema = new Schema({
 		ref: "User",
 	},
 	likes: {
-		type: Likes,
+		type: Number,
 		default: 0,
 	},
 	createdAt: {

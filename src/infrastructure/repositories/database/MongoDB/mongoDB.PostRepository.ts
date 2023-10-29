@@ -3,8 +3,7 @@ import { IPostRepository } from "../../IPostRepository";
 import PostSchema from "./Post/PostSchema";
 import { Comment } from "../../../../entities/comment";
 import CommentSchema from "./Comment/CommentSchema";
-import { PostRepository, UserRepository } from "../../../../use-cases/GlobalConfig";
-
+import { PostRepository } from "../../../../use-cases/GlobalConfig";
 
 export class MongoDBPostRepository implements IPostRepository {
 	async createPost(post: Post): Promise<Post> {

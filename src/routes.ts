@@ -6,7 +6,7 @@ import { getUserController } from "./use-cases/getUser/GetUserConfig";
 import { updateUserController } from "./use-cases/updateUser/UpdateUserConfig";
 import { deleteUserController } from "./use-cases/deleteUser/DeleteUserConfig";
 import { commentOnPostController } from "./use-cases/commentOnPost/CommentOnPostConfig";
-import { getPostController } from "./use-cases/getPost/GetPostConfig";
+import { getPostController } from "./use-cases/getPost/getPostConfig";
 import { userCreatePostController } from "./use-cases/userCreatePost/UserCreatePostConfig";
 import { getCommentController } from "./use-cases/getComment/GetCommentConfig";
 import { getPostByUserController } from "./use-cases/getPostsByUser/getPostByUserConfig";
@@ -21,108 +21,63 @@ router.use((_req: Request, _res: Response, next) => {
 });
 
 router.get("/users/:email", async (req: Request, res: Response) => {
-	try {
-		await getUserController.handleGetUserByEmail(req, res);
-	} catch (error) {
-		return res.sendStatus(404);
-	}
+	await getUserController.handleGetUserByEmail(req, res);
 });
 
 router.post("/users", async (req: Request, res: Response) => {
-	try {
-		await createUserController.handleCreateUser(req, res);
-	} catch (error) {
-		console.log(error);
-		return res.sendStatus(400);
-	}
+	await createUserController.handleCreateUser(req, res);
 });
 
 router.post("/posts", async (req: Request, res: Response) => {
-	try {
-		await createPostController.handleCreatePost(req, res);
-	} catch (error) {
-		return res.sendStatus(400);
-	}
+	await createPostController.handleCreatePost(req, res);
 });
 
 router.get("/users", async (req: Request, res: Response) => {
-	try {
-		await getUserController.handleGetAllUser(req, res);
-	} catch (error) {
-		return res.sendStatus(404);
-	}
+	await getUserController.handleGetAllUser(req, res);
 });
 
 router.put("/users/:email", async (req: Request, res: Response) => {
-	try {
-		await updateUserController.handleUpdateUser(req, res);
-	} catch (error) {
-		return res.sendStatus(400);
-	}
+	await updateUserController.handleUpdateUser(req, res);
 });
 
 router.delete("/users/:email", async (req: Request, res: Response) => {
-	try {
-		await deleteUserController.handleDeleteUserByEmail(req, res);
-	} catch (error) {
-		return res.sendStatus(404);
-	}
+	await deleteUserController.handleDeleteUserByEmail(req, res);
 });
 
 router.post("/postsComment", async (req: Request, res: Response) => {
-	try {
-		await commentOnPostController.handleCommentOnPost(req, res);
-	} catch (error) {
-		return res.sendStatus(400);
-	} });
+	await commentOnPostController.handleCommentOnPost(req, res);
+});
 
 router.get("/posts/:id", async (req: Request, res: Response) => {
-	try {
-		await getPostController.handleGetPostById(req, res);
-	} catch (error) {
-		return res.sendStatus(400);
-	}
+	await getPostController.handleGetPostById(req, res);
 });
 
 router.post("/usersPosts", async (req: Request, res: Response) => {
-	try {
-		await userCreatePostController.handleUserCreatePost(req, res);
-	} catch (error) {
-		return res.sendStatus(400);
-	}
+	await userCreatePostController.handleUserCreatePost(req, res);
 });
 
 router.get("/comments", async (req: Request, res: Response) => {
-	try {
-		await getCommentController.handleGetAllComments(req, res);
-	} catch (error) {
-		return res.sendStatus(400);
-	}
+	await getCommentController.handleGetAllComments(req, res);
+});
+
+router.get("/comments/:id", async (req: Request, res: Response) => {
+	await getCommentController.handleGetCommentById(req, res);
 });
 
 router.get("/usersPosts", async (req: Request, res: Response) => {
-	try {
-		await getPostByUserController.handleGetPostByUser(req, res);
-	}
-	catch (error) {
-		return res.sendStatus(500);
-	}
+	await getPostByUserController.handleGetPostByUser(req, res);
 });
 
 router.delete("/posts/:id", async (req: Request, res: Response) => {
-	try {
-		await deletePostController.handleDeletePostById(req, res);
-	} catch (error) {
-		return res.sendStatus(400);
-	}
+	await deletePostController.handleDeletePostById(req, res);
 });
 
 router.delete("/comments/:id", async (req: Request, res: Response) => {
-	try {
-		await deleteCommentController.handleDeleteCommentById(req, res);
-	} catch (error) {
-		return res.sendStatus(400);
-	}
+	await deleteCommentController.handleDeleteCommentById(req, res);
+});
+
+router.post("/comments", async (req: Request, res: Response) => {
+	await commentOnPostController.handleCommentOnPost(req, res);
 });
 
 export default router;

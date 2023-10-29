@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --watch",
     "start": "nodemon --exec ts-node src/app/server.ts eslint '**/*.ts' --fix"
   },
   "keywords": [],

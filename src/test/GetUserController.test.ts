@@ -1,11 +1,12 @@
 import request from "supertest";
 import app from "../app/app";
-import { describe,it,expect, beforeAll, afterAll } from "@jest/globals";
+import { describe,it,expect, beforeAll, afterAll, jest } from "@jest/globals";
 import {user} from "./userModel";
 
 describe("GetUserController", () => {
 
 	beforeAll(async () => {
+		jest.resetModules();
 		await request(app).post("/users").send(user); 
 	});
 

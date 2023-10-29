@@ -6,4 +6,9 @@ export class GetCommentUseCase {
 		const comments = await this.commentRepository.getAll();
 		return comments;
 	}
+
+	async executeGetById(id: string) {
+		const comment = await this.commentRepository.getById(id);
+		return comment;
+	}
 }

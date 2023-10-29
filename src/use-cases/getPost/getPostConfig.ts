@@ -1,4 +1,4 @@
-import { GetPostController } from "./GetPostController";
+import { GetPostController } from "./getPostController"; 
 import { GetPostUseCase } from "./GetPostUseCase";
 import { PostRepository } from "../GlobalConfig";
 
