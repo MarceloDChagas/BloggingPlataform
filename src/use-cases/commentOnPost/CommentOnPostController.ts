@@ -20,7 +20,6 @@ export class CommentOnPostController {
 			await this.postRepository.addComment(postId, comment);
 			return res.status(201).json({ message: "Comment created" });
 		} catch (error) {
-			console.error(error);
 			return res.status(400).json({ message: "Can't create Comment" });
 		}
 	}

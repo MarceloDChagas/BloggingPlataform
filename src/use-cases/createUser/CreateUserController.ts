@@ -7,14 +7,13 @@ export class CreateUserController {
 	async handleCreateUser(req: Request, res: Response) {
 		try {
 			const { name, username, age, email, password } = req.body;
-			//Retirar isso posteriormente conforme o principio do Single Responsabity
 			UserValidators.isNotValid({ name, username, age, email, password });
 			const hashedPassword = await UserValidators.hashPassword(password);
 			await this.createUserUseCase.executeCreateUser({
 				name,
 				username,
 				age,
-				email,  
+				email,  	
 				password: hashedPassword
 			});
 			return res.status(201).send({"message": "Usuário criado com sucesso!"});

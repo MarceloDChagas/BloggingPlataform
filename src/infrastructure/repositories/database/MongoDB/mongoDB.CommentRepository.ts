@@ -17,10 +17,7 @@ export class MongoDBCommentRepository implements ICommentRepository {
 	async create(comment: Comment): Promise<Comment> {
 		try {
 			const newComment = await CommentSchema.create(comment);
-			return {
-				...newComment.toObject(),
-				id: newComment._id.toString(),
-			} as Comment;
+			return newComment.toObject() as Comment;
 		} catch (err) {
 			throw new Error("Erro ao criar o comentário");
 		}

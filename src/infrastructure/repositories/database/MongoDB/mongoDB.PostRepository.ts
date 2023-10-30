@@ -9,12 +9,9 @@ export class MongoDBPostRepository implements IPostRepository {
 	async createPost(post: Post): Promise<Post> {
 		try {
 			const newPost = await PostSchema.create(post);
-			return {
-				...newPost.toObject(),
-				id: newPost._id.toString(),
-				comments: newPost.comments.map((comment) => comment.toString()),
-			} as Post;
+			return newPost.toObject() as Post;
 		} catch (err) {
+			
 			throw new Error("Erro ao criar o post");
 		}
 	}
@@ -74,7 +71,7 @@ export class MongoDBPostRepository implements IPostRepository {
 				post: postId,
 			});
 			await newComment.save();
-			post.comments.push(newComment._id);
+			post.comments.push(postId);
 			await post.save();
 		} catch (err) {
 			throw new Error("Erro ao adicionar o comentário");

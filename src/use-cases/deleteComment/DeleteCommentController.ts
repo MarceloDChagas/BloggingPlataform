@@ -10,7 +10,6 @@ export class DeletCommentController {
 			await this.deleteCommentUseCase.executeDeleteCommentById(id);
 			return response.status(200).send("Comentário deletado com sucesso!");
 		} catch (error) {
-			console.error(error);
 			return response.status(404).send("Erro ao deletar o comentário");
 		}
 	}

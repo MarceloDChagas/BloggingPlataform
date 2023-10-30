@@ -9,7 +9,6 @@ export class GetUserController {
 			res.status(200).json(users);
 			return users;
 		} catch (error) {
-			console.error(error);
 			res.status(404).send("Erro ao buscar usuários");
 		}
 	}
@@ -20,7 +19,6 @@ export class GetUserController {
 			res.status(200).json(user);
 			return user;
 		} catch (error) {
-			console.error(error);
 			res.status(404).send("Erro ao buscar usuário");
 		}
 	}

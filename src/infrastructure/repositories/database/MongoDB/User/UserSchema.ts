@@ -3,6 +3,10 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
+	_id: {
+		type: String, 
+		required: true,
+	},	
 	name: {
 		type: String,
 		required: true,
@@ -33,15 +37,14 @@ const UserSchema = new Schema({
 	},
 	posts: [
 		{
-			type: Schema.Types.ObjectId,
-			ref: "Post",
+			type: String,
 			default: [],
+			ref: "PostSchema",
 		},
 	],
 	likedPosts: [
 		{
-			type: Schema.Types.ObjectId,
-			ref: "Post",
+			type: String,
 			default: [],
 		},
 	],

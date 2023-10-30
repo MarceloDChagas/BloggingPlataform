@@ -1,7 +1,8 @@
 import { IUserDTO } from "./IUserDTO";
 import { Post } from "./post";
-
+import crypto from "crypto";
 export class User{
+	_id?: string;
 	name: string;
 	username: string;
 	age: number;
@@ -16,6 +17,8 @@ export class User{
 		this.age = data.age;
 		this.email = data.email;
 		this.password = data.password;
-        
+		this._id = crypto.randomBytes(16).toString("hex"); 
+		this.posts = [];
+		this.likedPosts = [];
 	}
 }

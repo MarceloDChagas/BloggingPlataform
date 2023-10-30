@@ -17,7 +17,7 @@ export class UserCreatePostController {
 			if (!user) {
 				return response.status(404).json({ message: "User not found" });
 			}
-			const post = this.userCreatePostUseCase.executeCreatePost({
+			const post = this.userCreatePostUseCase.executeUserCreatePost({
 				title,
 				content,
 			});
@@ -27,7 +27,6 @@ export class UserCreatePostController {
 			await this.userRepository.addPost(email, await post);
 			return response.status(201).json({ message: "Post created successfully" });
 		} catch (error) {
-			console.error(error);
 			return response.status(400).json({ message: "Internal server error" });
 		}
 	}

@@ -3,6 +3,10 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 const PostSchema = new Schema({
+	_id: {
+		type: String, 
+		required: true,
+	},
 	title: {
 		type: String,
 		required: true,
@@ -13,12 +17,12 @@ const PostSchema = new Schema({
 	},
 	comments: [
 		{
-			type: Schema.Types.ObjectId,
+			type: String,
 			ref: "Comment",
 		},
 	],
 	user: {
-		type: Schema.Types.ObjectId,
+		type: String,
 		ref: "User",
 	},
 	likes: {

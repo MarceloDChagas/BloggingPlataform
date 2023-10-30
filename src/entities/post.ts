@@ -1,7 +1,8 @@
 import { IPostDTO } from "./IPostDTO";
 import { Likes } from "./likes";
-
+import crypto from "crypto";
 export class Post {
+	_id?: string;
 	title: string;
 	content: string;
 	comments?: string[];
@@ -14,7 +15,7 @@ export class Post {
 		if (comments) {
 			this.comments = comments;
 		}
-		this.id = data.id;
+		this._id = crypto.randomBytes(16).toString("hex");
 	}
 }
 

@@ -24,6 +24,10 @@ router.get("/users/:email", async (req: Request, res: Response) => {
 	await getUserController.handleGetUserByEmail(req, res);
 });
 
+router.get("/posts", async (req: Request, res: Response) => {
+	await getPostController.handleGetAllPosts(req, res);
+});
+
 router.post("/users", async (req: Request, res: Response) => {
 	await createUserController.handleCreateUser(req, res);
 });

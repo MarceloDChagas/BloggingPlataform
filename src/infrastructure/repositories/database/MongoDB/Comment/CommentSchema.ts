@@ -3,6 +3,10 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 const CommentSchema = new Schema({
+	_id: {
+		type: String, 
+		required: true,
+	},
 	content: {
 		type: String,
 		required: true,
