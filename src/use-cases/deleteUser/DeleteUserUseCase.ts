@@ -5,7 +5,7 @@ export class DeleteUserUseCase {
 	async executeDeleteUserByEmail(email:string): Promise<void> {
 		const userAlreadyExists = await this.userRepository.findByEmail(email);
 		if(!userAlreadyExists){
-			throw new Error("User not even exists");
+			throw new Error("User not found");
 		}
 		await this.userRepository.delete(email);
 	}

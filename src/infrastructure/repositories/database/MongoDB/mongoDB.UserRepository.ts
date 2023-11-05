@@ -49,11 +49,11 @@ export class MongoDBUserRepository implements IUserRepository {
 		}
 	}
 
-	async findByEmail(email: string): Promise<User | null> {
+	async findByEmail(email: string): Promise<User | undefined> {
 		try {
 			const user = await UserSchema.findOne({ email });
 			if (!user) {
-				return null;
+				return undefined;
 			}
 			return user.toObject() as User;
 		} catch (err) {
@@ -79,12 +79,9 @@ export class MongoDBUserRepository implements IUserRepository {
 		
 	}
 
-	async getAllPostsForUser(userEmail: string): Promise<Post[]> {
+	async getAllPostsForUser(userEmail: string): Promise<Post[] | undefined> {
 		try {
-			const email = await UserSchema.find({ email: userEmail });
-			if (!email) {
-				throw new Error("Email não encontrado no banco de dados MongoDB");
-			}
+			await UserSchema.find({ email: userEmail });
 			const posts: Post[] = await PostSchema.find({ user: userEmail });
 			return posts;
 		}catch(err){

@@ -6,7 +6,7 @@ export class GetPostController {
 	async handleGetPostById(request: Request, response: Response) {
 		try {
 			const { id } = request.params;
-			const post = await this.getPostUseCase.executeGetById(id);
+			const post = await this.getPostUseCase.executeGetPostById(id);
 			return response.status(200).json(post);
 		} catch (error) {
 			return response.status(400).json({ message: "Erro ao buscar post" });
@@ -14,7 +14,7 @@ export class GetPostController {
 	}
 	async handleGetAllPosts(_request: Request, response: Response) {
 		try {
-			const posts = await this.getPostUseCase.executeGetAll();
+			const posts = await this.getPostUseCase.executeGetAllPosts();
 			return response.status(200).json(posts);
 		} catch (error) {
 			return response.status(400).json({ message: "Erro ao buscar posts" });

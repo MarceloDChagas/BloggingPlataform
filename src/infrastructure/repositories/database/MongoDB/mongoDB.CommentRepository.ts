@@ -43,9 +43,12 @@ export class MongoDBCommentRepository implements ICommentRepository {
    * @returns An array of all comments in the database.
    * @throws An error if there was a problem retrieving the comments.
    */
-	async getAll(): Promise<Comment[]> {
+	async getAll(): Promise<Comment[] | undefined> {
 		try {
 			const comments = await CommentSchema.find();
+			if(!comments){
+				return undefined;
+			}
 			return comments.map((comment) => ({
 				...comment.toObject(),
 				id: comment._id.toString(),
@@ -55,11 +58,11 @@ export class MongoDBCommentRepository implements ICommentRepository {
 		}
 	}
 
-	async getById(id: string): Promise<Comment> {
+	async getById(id: string): Promise<Comment | undefined> {
 		try {
 			const comment = await CommentSchema.findById(id);
 			if (!comment) {
-				throw new Error("Comentário não encontrado");
+				return undefined;
 			}
 			return {
 				...comment.toObject(),
@@ -82,6 +85,9 @@ export class MongoDBCommentRepository implements ICommentRepository {
 		try{
 			const comment = await CommentRepository.getById(commentId);
 			await UserRepository.findById(userId);
+			if(!comment){
+				throw new Error("Comentário não encontrado");
+			}
 			comment.likes?.addLike(userId);
 			await CommentRepository.update(commentId, comment);
 		}catch(err){

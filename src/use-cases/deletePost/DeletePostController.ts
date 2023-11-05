@@ -7,7 +7,7 @@ export class DeletePostController {
 	async handleDeletePostById(request: Request, response: Response) {
 		try {
 			const { id } = request.params;
-			await this.deletePostUseCase.executeDeletePost(id);
+			await this.deletePostUseCase.executeDeletePostById(id);
 			return response.status(200).send("Post deletado com sucesso!");
 		} catch (error) {
 			return response.status(404).send("Erro ao deletar o post");

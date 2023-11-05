@@ -7,6 +7,8 @@ export interface IPostRepository {
   getAllPosts(): Promise<Post[]>;
   updatePost(id: string, post: Post): Promise<void>;
   deletePost(id: string): Promise<void>;
-  getById(id: string): Promise<Post | null>;    
+  getById(id: string): Promise<Post | undefined>;    
   likePost(postAndUserEmail: [Post, string]): Promise<void>;
+  deslikePost(postAndUserEmail: [Post, string]): Promise<void>;
+  userAlreadyLiked(postAndUserEmail: [Post, string]): Promise<boolean>;
 }

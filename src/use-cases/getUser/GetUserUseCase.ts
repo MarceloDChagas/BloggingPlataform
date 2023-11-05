@@ -6,7 +6,7 @@ export class GetUserUseCase{
 	async executeGetAllUser(){
 		const users = await this.userRepository.getAll();
 		if(!users){
-			throw new Error("Users not found");
+			return [];
 		}
 		return users;
 	}
@@ -14,7 +14,7 @@ export class GetUserUseCase{
 	async executeGetUserByEmail(email: string){
 		const user = await this.userRepository.findByEmail(email);
 		if(!user){
-			throw new Error("User not found");
+			return [];
 		}
 		return user;
 	}

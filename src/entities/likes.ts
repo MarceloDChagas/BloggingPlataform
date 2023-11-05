@@ -9,7 +9,7 @@ export class Likes {
 		this.users = data.users;
 	}
 
-	public addLike(email: string): void {
+	addLike(email: string): void {
 		this.count++;
 		if (this.users) {
 			this.users.push(email);
@@ -18,7 +18,7 @@ export class Likes {
 		}
 	}
 
-	public removeLike(email: string): void {
+	removeLike(email: string): void {
 		this.count--;
 		if (this.users) {
 			const index = this.users.indexOf(email);
@@ -26,5 +26,9 @@ export class Likes {
 				this.users.splice(index, 1);
 			}
 		}
+	}
+
+	getLikes(): number {
+		return this.count;
 	}
 }

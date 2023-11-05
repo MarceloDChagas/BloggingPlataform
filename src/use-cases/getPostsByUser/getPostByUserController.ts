@@ -5,8 +5,8 @@ export class GetPostByUserController {
 	constructor(private getPostByUserUseCase: GetPostByUserUseCase) {
 	}
 	async handleGetPostByUser(req: Request, res: Response) {
-		const { id } = req.params;
-		const user = await this.getPostByUserUseCase.executeGetPostByUser(id);
+		const { email } = req.params;
+		const user = await this.getPostByUserUseCase.executeGetPostByUser(email);
 		return res.status(200).send(user);
 	}
 }

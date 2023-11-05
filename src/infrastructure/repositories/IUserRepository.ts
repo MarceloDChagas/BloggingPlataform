@@ -6,8 +6,8 @@ export interface IUserRepository {
     update(id: string, user: User): Promise<void> | null ;
     delete(email: string): Promise<void>;
     getAll(): Promise<User[]>;
-    findByEmail(email: string): Promise<User | null>;
+    findByEmail(email: string): Promise<User | undefined>;
     findById(id: string): Promise<User | null>;     
     addPost(postId: string, post: Post): Promise<void>;
-    getAllPostsForUser(id: string): Promise<Post[]>;
+    getAllPostsForUser(email: string): Promise<Post[] | undefined>;
     }

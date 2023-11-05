@@ -4,7 +4,7 @@ import PostSchema from "./Post/PostSchema";
 import { Comment } from "../../../../entities/comment";
 import CommentSchema from "./Comment/CommentSchema";
 import { PostRepository } from "../../../../use-cases/GlobalConfig";
-
+	
 export class MongoDBPostRepository implements IPostRepository {
 	async createPost(post: Post): Promise<Post> {
 		try {
@@ -44,11 +44,11 @@ export class MongoDBPostRepository implements IPostRepository {
 		}
 	}
   
-	async getById(id: string): Promise<Post | null> {
+	async getById(id: string): Promise<Post | undefined> {
 		try {
 			const post = await PostSchema.findById(id);
 			if (!post) {
-				return null;
+				return undefined;
 			}
 			return {
 				...post.toObject(),
@@ -88,5 +88,23 @@ export class MongoDBPostRepository implements IPostRepository {
 		} catch (err) {
 			throw new Error("Erro ao curtir o post");
 		}
+	}
+
+	async deslikePost(postAndUserEmail: [Post, string]): Promise<void> {
+		try {
+			if (postAndUserEmail[0].id === undefined) {
+				throw new Error("Email do usuário não pode ser undefined");
+			}	
+			postAndUserEmail[0].likes?.removeLike(postAndUserEmail[1]);
+			await PostRepository.updatePost(postAndUserEmail[0].id, postAndUserEmail[0]);
+		} catch (err) {
+			throw new Error("Erro ao descurtir o post");
+		}
+	}
+
+	async userAlreadyLiked(postAndUserEmail: [Post, string]): Promise<boolean> {
+
+		return postAndUserEmail[0].likes?.users?.includes(postAndUserEmail[1]) ?? false;
+		
 	}
 }

@@ -3,7 +3,7 @@ import { IPostRepository } from "../../infrastructure/repositories/IPostReposito
 export class DeletePostUseCase {
 	constructor(private postRepository: IPostRepository) {}
 
-	async executeDeletePost(postId: string) {
+	async executeDeletePostById(postId: string) {
 		const post = await this.postRepository.getById(postId);
 		if (!post) {
 			throw new Error("Post not found");

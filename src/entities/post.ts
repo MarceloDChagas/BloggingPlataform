@@ -9,11 +9,14 @@ export class Post {
 	id?: string;
 	likes?: Likes;
 
-	constructor(data: IPostDTO, comments?: string[]) {
+	constructor(data: IPostDTO, comments?: string[], likes?: Likes) {
 		this.title = data.title;
 		this.content = data.content;
 		if (comments) {
 			this.comments = comments;
+		}
+		if(likes){
+			this.likes = likes;
 		}
 		this._id = crypto.randomBytes(16).toString("hex");
 	}

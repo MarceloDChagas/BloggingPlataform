@@ -4,8 +4,9 @@ import { IPostRepository } from "../../infrastructure/repositories/IPostReposito
 
 export class CreatePostUseCase {
 	constructor(private postRepository: IPostRepository)  {}
-	async executeCreatePost(data: IPostDTO): Promise<void> {
+	async executeCreatePost(data: IPostDTO): Promise<Post> {
 		const post = new Post(data);
 		await this.postRepository.createPost(post);
+		return post;
 	}
 }
